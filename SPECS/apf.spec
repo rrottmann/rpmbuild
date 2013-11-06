@@ -1,11 +1,11 @@
 Summary: Adventure PHP Framework
 Name: apf
-Version: 1.17
-Release: 2%{?dist}
-License: GPLv3 and LGPLv3
+Version: 2.0
+Release: 1%{?dist}
+License: LGPLv3
 Group: Applications/System
 URL: http://www.adventure-php-framework.org
-Source: http://files.adventure-php-framework.org/1.17/download/apf-demopack-1.17-2013-04-13-1126-php5.tar.gz
+Source: http://files.adventure-php-framework.org/2.0-beta/download/apf-demopack-2.0-beta-2013-10-31-2127-php5.tar.gz
 Source1: adventure-php-framework.conf
 BuildArch: noarch
 
@@ -31,8 +31,8 @@ mkdir -p %{buildroot}%{_datadir}
 mkdir -p %{buildroot}%{_datadir}/doc
 mkdir -p %{buildroot}%{_datadir}/doc/adventure-php-framework
 mkdir -p %{buildroot}%{_sysconfdir}/httpd/conf.d/
-mkdir -p %{buildroot}%{_sysconfdir}/adventure-php-framework/apps/
-mkdir -p %{buildroot}%{_sharedstatedir}/adventure-php-framework/{crash,devel,prod}
+mkdir -p %{buildroot}%{_sysconfdir}/adventure-php-framework/APF/
+mkdir -p %{buildroot}%{_sharedstatedir}/adventure-php-framework/APF/
 cp -av . %{buildroot}%{_datadir}/adventure-php-framework
 cp %{SOURCE1} %{buildroot}%{_sysconfdir}/httpd/conf.d/
 # remove zero-length files
@@ -43,11 +43,11 @@ find %{buildroot}%{_datadir}/adventure-php-framework/ -type f -iname "*.txt" -ex
 find %{buildroot}%{_datadir}/adventure-php-framework/ -type f -iname "*.js" -exec dos2unix {} &>/dev/null \;
 find %{buildroot}%{_datadir}/doc/adventure-php-framework/ -type f -iname "*.txt" -exec dos2unix {} &>/dev/null \;
 # move files to honour the file hierarchy standard
-mv %{buildroot}%{_datadir}/adventure-php-framework/apps/sandbox %{buildroot}%{_sharedstatedir}/adventure-php-framework/
+mv %{buildroot}%{_datadir}/adventure-php-framework/APF/sandbox %{buildroot}%{_sharedstatedir}/adventure-php-framework/APF
 mv %{buildroot}%{_datadir}/adventure-php-framework/*.txt %{buildroot}%{_datadir}/doc/adventure-php-framework/
-mv %{buildroot}%{_datadir}/adventure-php-framework/apps/config %{buildroot}%{_sysconfdir}/adventure-php-framework/apps/
-ln -s %{_sysconfdir}/adventure-php-framework/apps/config %{buildroot}%{_datadir}/adventure-php-framework/apps/ 
-ln -s %{_sharedstatedir}/adventure-php-framework/{sandbox,crash,devel,prod} %{buildroot}%{_datadir}/adventure-php-framework/apps/
+mv %{buildroot}%{_datadir}/adventure-php-framework/APF/config %{buildroot}%{_sysconfdir}/adventure-php-framework/APF/
+ln -s %{_sysconfdir}/adventure-php-framework/APF/config %{buildroot}%{_datadir}/adventure-php-framework/APF/ 
+ln -s %{_sharedstatedir}/adventure-php-framework/APF/sandbox %{buildroot}%{_datadir}/adventure-php-framework/APF/ 
 
 %post
 semanage fcontext -a -t httpd_sys_content_t %{_datadir}/adventure-php-framework 2>/dev/null
@@ -68,6 +68,14 @@ fi
 %config(noreplace) %{_sysconfdir}/adventure-php-framework/
 
 %changelog
+* Wed Nov  6 2013 Reiner Rottmann <reiner@rottmann.it> 2.0-1
+- Using latest apf 2.0 beta
+- Changed target dirs as upstream package changed structure
+- Worked on license issues reported in bz#734248 comment20
+- Clarified with upstream dev team that project is LGPLv3
+- Upstream package removed file JSMin.php
+- Upstream package removed Googles recaptchalib.php
+
 * Mon Oct 21 2013 Reiner Rottmann <reiner@rottmann.it> 1.17-2
 - Incorporated improvements from bz#734248 comment15
 
