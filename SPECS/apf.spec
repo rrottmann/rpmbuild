@@ -1,11 +1,11 @@
 Summary: Adventure PHP Framework
 Name: apf
-Version: 2.0
+Version: 2.1
 Release: 1%{?dist}
 License: LGPLv3
 Group: Applications/System
 URL: http://www.adventure-php-framework.org
-Source: http://files.adventure-php-framework.org/2.0-beta/download/apf-demopack-2.0-beta-2013-10-31-2127-php5.tar.gz
+Source: http://files.adventure-php-framework.org/2.1/download/apf-demopack-2.1.1-2014-09-06-1448-php5.tar.gz
 Source1: adventure-php-framework.conf
 BuildArch: noarch
 
@@ -45,8 +45,8 @@ find %{buildroot}%{_datadir}/doc/adventure-php-framework/ -type f -iname "*.txt"
 # move files to honour the file hierarchy standard
 mv %{buildroot}%{_datadir}/adventure-php-framework/APF/sandbox %{buildroot}%{_sharedstatedir}/adventure-php-framework/APF
 mv %{buildroot}%{_datadir}/adventure-php-framework/*.txt %{buildroot}%{_datadir}/doc/adventure-php-framework/
-mv %{buildroot}%{_datadir}/adventure-php-framework/APF/config %{buildroot}%{_sysconfdir}/adventure-php-framework/APF/
-ln -s %{_sysconfdir}/adventure-php-framework/APF/config %{buildroot}%{_datadir}/adventure-php-framework/APF/ 
+mv %{buildroot}%{_datadir}/adventure-php-framework/config %{buildroot}%{_sysconfdir}/adventure-php-framework/
+ln -s %{_sysconfdir}/adventure-php-framework/config %{buildroot}%{_datadir}/adventure-php-framework/ 
 ln -s %{_sharedstatedir}/adventure-php-framework/APF/sandbox %{buildroot}%{_datadir}/adventure-php-framework/APF/ 
 
 %post
@@ -68,6 +68,12 @@ fi
 %config(noreplace) %{_sysconfdir}/adventure-php-framework/
 
 %changelog
+* Tue Jan 6 2015 Reiner Rottmann <reiner@rottmann.it> 2.1-1
+- Using official apf 2.1 release
+
+* Sun Feb  2 2014 Reiner Rottmann <reiner@rottmann.it> 2.0-2
+- Using official apf 2.0 release
+
 * Wed Nov  6 2013 Reiner Rottmann <reiner@rottmann.it> 2.0-1
 - Using latest apf 2.0 beta
 - Changed target dirs as upstream package changed structure
